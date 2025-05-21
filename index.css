@@ -79,6 +79,16 @@ td:empty {
 .main a:hover {
   text-decoration: underline;
 }
+.countdown-box {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  padding: 12px 0;
+  background: #fffbe7;
+  border-radius: 8px;
+  font-size: 1.2em;
+  color: #b85c00;
+  box-shadow: 0 2px 8px rgba(255, 200, 80, 0.08);
+}
 a.ver {
   display: block;
   text-align: right;
