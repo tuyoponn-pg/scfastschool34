@@ -1,7 +1,11 @@
-.timetable{
+.main{
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+.timetable{
+  empty-cells: hide;
+  border-collapse: collapse;
 }
 .ver{
   position: relative;
