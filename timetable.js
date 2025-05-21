@@ -9,19 +9,30 @@ fetch('timetable.json')
       option.textContent = weekName;
       weekSelect.appendChild(option);
     });
+
     function renderTable(weekName) {
       const timetable = data[weekName];
-      let html = '<table border="1"><tr><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th></tr>';
-      for (let i = 0; i < timetable.length; i++) {
+      const days = ["月", "火", "水", "木", "金"];
+      // 最大コマ数を取得
+      const maxPeriods = Math.max(...days.map(day => (timetable[day] ? timetable[day].length : 0)));
+      let html = '<table border="1"><tr>';
+      // 曜日ヘッダー
+      days.forEach(day => {
+        html += `<th>${day}</th>`;
+      });
+      html += '</tr>';
+      // 各コマごとに行を作成
+      for (let period = 0; period < maxPeriods; period++) {
         html += '<tr>';
-        for (let j = 0; j < timetable[i].length; j++) {
-          html += `<td>${timetable[i][j]}</td>`;
-        }
+        days.forEach(day => {
+          html += `<td>${(timetable[day] && timetable[day][period]) ? timetable[day][period] : ''}</td>`;
+        });
         html += '</tr>';
       }
       html += '</table>';
       timetableDiv.innerHTML = html;
     }
+
     renderTable(weekSelect.value = Object.keys(data)[0]);
     weekSelect.addEventListener('change', () => {
       renderTable(weekSelect.value);
