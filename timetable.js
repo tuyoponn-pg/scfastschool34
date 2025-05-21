@@ -16,7 +16,7 @@ fetch('timetable.json')
       const maxPeriods = Math.max(...days.map(day => (timetable[day] ? timetable[day].length : 0)));
       let html = '<table border="1"><tr>';
       days.forEach(day => {
-        html += `<th>${day}</th>`;
+        html += `<th class="day-${day}">${day}</th>`;
       });
       html += '</tr>';
       for (let period = 0; period < maxPeriods; period++) {

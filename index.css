@@ -7,6 +7,11 @@
   empty-cells: hide;
   border-collapse: collapse;
 }
+.day-月 { background: #ffcccc; }
+.day-火 { background: #ffe5b4; }
+.day-水 { background: #ccffcc; }
+.day-木 { background: #b4e1ff; }
+.day-金 { background: #e1b4ff; }
 .ver{
   position: relative;
   bottom: 0px;
