@@ -13,15 +13,12 @@ fetch('timetable.json')
     function renderTable(weekName) {
       const timetable = data[weekName];
       const days = ["月", "火", "水", "木", "金"];
-      // 最大コマ数を取得
       const maxPeriods = Math.max(...days.map(day => (timetable[day] ? timetable[day].length : 0)));
       let html = '<table border="1"><tr>';
-      // 曜日ヘッダー
       days.forEach(day => {
         html += `<th>${day}</th>`;
       });
       html += '</tr>';
-      // 各コマごとに行を作成
       for (let period = 0; period < maxPeriods; period++) {
         html += '<tr>';
         days.forEach(day => {
