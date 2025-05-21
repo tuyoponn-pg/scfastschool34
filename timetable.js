@@ -37,7 +37,7 @@ function loadAndRenderTimetable() {
     });
 }
 function updateCountdown() {
-  const gradDate = new Date('2026-06-13T00:00:00+09:00');
+  const gradDate = new Date('2026-03-13T00:00:00+09:00');
   const now = new Date();
   const diff = Math.ceil((gradDate - now) / (1000 * 60 * 60 * 24));
   const countdownElem = document.getElementById('countdown');
