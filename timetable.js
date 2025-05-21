@@ -36,8 +36,6 @@ function loadAndRenderTimetable() {
       weekSelect.onchange = () => renderTable(weekSelect.value);
     });
 }
-loadAndRenderTimetable();
-setInterval(loadAndRenderTimetable, 3 * 60 * 1000);
 function updateCountdown() {
   const gradDate = new Date('2026-06-13T00:00:00+09:00');
   const now = new Date();
@@ -47,5 +45,9 @@ function updateCountdown() {
     countdownElem.textContent = diff > 0 ? diff : 0;
   }
 }
-updateCountdown();
-setInterval(updateCountdown, 60 * 60 * 1000);
+document.addEventListener('DOMContentLoaded', function() {
+  loadAndRenderTimetable();
+  updateCountdown();
+  setInterval(loadAndRenderTimetable, 3 * 60 * 1000);
+  setInterval(updateCountdown, 60 * 60 * 1000);
+});
