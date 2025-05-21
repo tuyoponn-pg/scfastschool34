@@ -12,6 +12,13 @@
 .day-水 { background: #ccffcc; }
 .day-木 { background: #b4e1ff; }
 .day-金 { background: #e1b4ff; }
+.main a {
+  color: #ff9600;
+  text-decoration: none;
+}
+.main a:hover {
+  text-decoration: underline;
+}
 .ver{
   position: relative;
   bottom: 0px;
