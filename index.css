@@ -1,8 +1,7 @@
 body{
   display: flex;
-  flex-direction: column;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-direction: column;
 }
 .ver{
   position: relative;
