@@ -1,17 +1,77 @@
-.main{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+body {
+  font-family: 'Segoe UI', 'Meiryo', sans-serif;
+  background: #f6f8fa;
+  margin: 0;
+  padding: 0;
 }
-.timetable{
-  empty-cells: hide;
+.main {
+  max-width: 600px;
+  margin: 40px auto 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  padding: 32px 24px 24px 24px;
+}
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 24px;
+}
+label {
+  font-size: 1.1em;
+  margin-right: 8px;
+}
+select {
+  font-size: 1em;
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  margin-bottom: 24px;
+  background: #f9f9f9;
+  transition: border 0.2s;
+}
+select:focus {
+  border: 1.5px solid #4a90e2;
+  outline: none;
+}
+table {
+  width: 100%;
   border-collapse: collapse;
+  margin-top: 16px;
+  background: #fafbfc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
-.day-月 { background: #ffcccc; }
-.day-火 { background: #ffe5b4; }
-.day-水 { background: #ccffcc; }
-.day-木 { background: #b4e1ff; }
-.day-金 { background: #e1b4ff; }
+th, td {
+  text-align: center;
+  padding: 10px 0;
+  border: 1px solid #e0e0e0;
+  font-size: 1em;
+}
+th {
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 0.1em;
+}
+.day-月 {
+  background: #ffcccc;
+}
+.day-火 {
+  background: #ffe5b4;
+}
+.day-水 {
+  background: #ccffcc;
+}
+.day-木 {
+  background: #b4e1ff;
+}
+.day-金 {
+  background: #e1b4ff;
+}
+td:empty {
+  background: #f0f0f0;
+}
 .main a {
   color: #ff9600;
   text-decoration: none;
@@ -19,7 +79,11 @@
 .main a:hover {
   text-decoration: underline;
 }
-.ver{
-  position: relative;
-  bottom: 0px;
+a.ver {
+  display: block;
+  text-align: right;
+  color: #ff9600;
+  text-decoration: none;
+  font-size: 0.95em;
+  margin: 12px 24px 0 0;
 }
