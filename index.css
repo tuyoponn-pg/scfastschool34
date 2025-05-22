@@ -89,6 +89,34 @@ td:empty {
   color: #b85c00;
   box-shadow: 0 2px 8px rgba(255, 200, 80, 0.08);
 }
+.music-section {
+  margin: 32px 0 0 0;
+  padding: 24px 16px;
+  background: #f9f6ff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(160, 100, 255, 0.08);
+  text-align: center;
+}
+.music-section h2 {
+  margin-top: 0;
+  color: #7c3aed;
+  font-size: 1.2em;
+  letter-spacing: 0.05em;
+}
+#music-box iframe {
+  margin-top: 12px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(160, 100, 255, 0.10);
+}
+.main {
+  max-width: 650px;
+  margin: 40px auto 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+  padding: 36px 28px 28px 28px;
+}
 a.ver {
   display: block;
   text-align: right;
