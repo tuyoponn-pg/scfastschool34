@@ -109,6 +109,65 @@ td:empty {
   border: none;
   box-shadow: 0 2px 8px rgba(160, 100, 255, 0.10);
 }
+.contact-form {
+  margin: 32px 0 0 0;
+  padding: 28px 20px 20px 20px;
+  background: #fff8f0;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(255, 180, 80, 0.10);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.contact-form label {
+  display: block;
+  margin-top: 16px;
+  color: #b85c00;
+  font-weight: bold;
+  font-size: 1.05em;
+  letter-spacing: 0.03em;
+}
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1.5px solid #ffd699;
+  border-radius: 8px;
+  background: #fffdfa;
+  font-size: 1em;
+  box-sizing: border-box;
+  transition: border 0.2s;
+}
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+  border: 1.5px solid #ff9600;
+  outline: none;
+  background: #fff7e6;
+}
+.contact-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+.contact-form input[type="submit"] {
+  margin-top: 20px;
+  background: linear-gradient(90deg, #ffb347 0%, #ffcc80 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255, 180, 80, 0.10);
+  transition: background 0.2s, color 0.2s;
+}
+.contact-form input[type="submit"]:hover {
+  background: linear-gradient(90deg, #ff9600 0%, #ffb347 100%);
+  color: #fffbe7;
+}
 .main {
   max-width: 650px;
   margin: 40px auto 0 auto;
