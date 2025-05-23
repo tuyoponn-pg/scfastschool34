@@ -49,3 +49,28 @@ span{
   margin-top: -100px;
   padding-top: 100px;
 }
+
+/* ダークモード */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #181a1b;
+    color: #f3f3f3;
+  }
+  .story, .status, .credit, .link {
+    background-color: #23272a;
+    color: #fff;
+    box-shadow: 0 0 16px rgba(0,0,0,0.7);
+  }
+  .status a {
+    color: #aaa !important;
+  }
+  h1 {
+    color: #ffe066;
+  }
+  .main a {
+    color: #ffe066;
+  }
+  .main a:hover {
+    color: #ffb347;
+  }
+}
