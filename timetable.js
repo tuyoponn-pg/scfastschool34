@@ -37,7 +37,7 @@ function loadAndRenderTimetable() {
           html += '<tr>';
           days.forEach((day, i) => {
             const isToday = i === (now.getDay() - 1) && weekName === initialWeek;
-            html += `<td${isToday && timetable[day][period] ? ' style="background:#ffe066;font-weight:bold;"' : ''}>${(timetable[day] && timetable[day][period]) ? timetable[day][period] : ''}</td>`;
+            html += `<td${isToday && timetable[day][period] ? ' style="background:#ff4d4d;font-weight:bold;"' : ''}>${(timetable[day] && timetable[day][period]) ? timetable[day][period] : ''}</td>`;
           });
           html += '</tr>';
         }
