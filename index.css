@@ -168,6 +168,10 @@ td:empty {
   background: linear-gradient(90deg, #ff9600 0%, #ffb347 100%);
   color: #fffbe7;
 }
+.contact{
+  display: flex;
+  justify-content: center;
+}
 .main {
   max-width: 650px;
   margin: 40px auto 0 auto;
