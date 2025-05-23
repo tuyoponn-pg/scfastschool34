@@ -63,6 +63,6 @@ function showMusic(url) {
   `;
 }
 // 日替わりで表示
-// document.addEventListener('DOMContentLoaded', showDailyMusic);
+document.addEventListener('DOMContentLoaded', showDailyMusic);
 // ランダムで表示
-document.addEventListener('DOMContentLoaded', showRandomMusic);
+// document.addEventListener('DOMContentLoaded', showRandomMusic);
