@@ -62,6 +62,6 @@ function updateCountdown() {
 document.addEventListener('DOMContentLoaded', function() {
   loadAndRenderTimetable();
   updateCountdown();
-  setInterval(loadAndRenderTimetable, 3 * 60 * 1000);
-  setInterval(updateCountdown, 60 * 60 * 1000);
+  setInterval(loadAndRenderTimetable, 5 * 1000);
+  setInterval(updateCountdown, 5 * 1000);
 });
