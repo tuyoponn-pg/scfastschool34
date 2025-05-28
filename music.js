@@ -95,7 +95,7 @@ function shuffleWithSeed(array, seed) {
 function updateShuffledListIfNeeded() {
   const today = new Date();
   const dateStr = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-  if (lastMusicDateStr !== dateStr || shuffledList.length !== musicList.length) {
+  if (lastMusicDateStr !== dateStr) {
     shuffledList = shuffleWithSeed(musicList, getSeedFromDate());
     lastMusicDateStr = dateStr;
     currentMusicIndex = 0;
@@ -138,7 +138,7 @@ function checkDateAndUpdateMusic() {
 // 初回表示＆1秒ごとに日付変化を監視
 document.addEventListener('DOMContentLoaded', () => {
   showCurrentMusic();
-  setInterval(checkDateAndUpdateMusic, 1000);
+  setInterval(checkDateAndUpdateMusic, 30*1000);
 });
 // ランダムで表示
 // document.addEventListener('DOMContentLoaded', showRandomMusic);
