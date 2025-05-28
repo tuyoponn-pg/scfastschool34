@@ -45,6 +45,7 @@ const musicList = [
 ];
 let currentMusicIndex = 0;
 let shuffledList = [];
+let lastDateStr = null;
 // 試験運用モード判定
 function isTrialMode() {
   return localStorage.getItem('trial_mode') === "1";
