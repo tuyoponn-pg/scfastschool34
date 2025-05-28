@@ -44,7 +44,6 @@ const musicList = [
   "https://embed.music.apple.com/jp/album/%E5%A4%9C%E3%81%98%E3%82%83%E3%81%AA%E3%81%8F%E3%81%A6%E3%82%82%E3%81%8A%E5%8C%96%E3%81%91%E3%81%AF%E3%81%84%E3%82%8B%E3%81%8B%E3%82%89/1756212029?i=1756212040&amp;itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1756212040&amp;theme=auto"// 夜じゃなくてもお化けはいるから
 ];
 let currentMusicIndex = 0;
-let lastDateStr = null;
 let shuffledList = [];
 // 試験運用モード判定
 function isTrialMode() {

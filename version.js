@@ -1,24 +1,22 @@
 const CURRENT_VERSION = "1.4.3.6";
-const VERSION_CHECK_URL = "patchnote.html";
+const VERSION_CHECK_URL = "version.json";
 const TRIAL_MODE_KEY = "trial_mode";
 
 // バージョンチェックして新しければリロード＆バージョン表記も更新
 function checkForUpdateAndSetVersion() {
   fetch(VERSION_CHECK_URL)
-    .then(res => res.text())
-    .then(html => {
-      const match = html.match(/Ver([0-9.]+)/);
-      if (match && match[1]) {
-        // バージョン表記を更新
-        const verElem = document.querySelector('a.ver');
-        if (verElem) {
-          verElem.textContent = "Ver" + match[1];
-        }
-        // バージョンが違えばリロード確認
-        if (match[1] !== CURRENT_VERSION) {
-          if (confirm("新しいバージョン（Ver" + match[1] + "）が公開されています。ページを更新しますか？")) {
-            location.reload(true);
-          }
+    .then(res => res.json())
+    .then(json => {
+      const latestVersion = json.version;
+      // バージョン表記を更新
+      const verElem = document.querySelector('a.ver');
+      if (verElem && latestVersion) {
+        verElem.textContent = "Ver" + latestVersion;
+      }
+      // バージョンが違えばリロード確認
+      if (latestVersion && latestVersion !== CURRENT_VERSION) {
+        if (confirm("新しいバージョン（Ver" + latestVersion + "）が公開されています。ページを更新しますか？")) {
+          location.reload(true);
         }
       }
     });
