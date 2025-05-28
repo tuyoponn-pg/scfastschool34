@@ -1,4 +1,4 @@
-const CURRENT_VERSION = "1.4.2.4";
+const CURRENT_VERSION = "1.4.3.1";
 const VERSION_CHECK_URL = "patchnote.html";
 const TRIAL_MODE_KEY = "trial_mode";
 
