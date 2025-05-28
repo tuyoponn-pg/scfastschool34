@@ -1,4 +1,4 @@
-const CURRENT_VERSION = "1.4.3.8";
+const CURRENT_VERSION = "1.4.3.9";
 const VERSION_CHECK_URL = "version.json";
 const TRIAL_MODE_KEY = "trial_mode";
 

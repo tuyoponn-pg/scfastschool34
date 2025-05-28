@@ -45,14 +45,14 @@ const musicList = [
 ];
 let currentMusicIndex = 0;
 let shuffledList = [];
-let lastDateStr = null;
+let lastMusicDateStr = null;
 // 試験運用モード判定
 function isTrialMode() {
   return localStorage.getItem('trial_mode') === "1";
 }
 // ボタン設置（試験運用モードのみ）
 function setupMusicNavButtons() {
-  if (!isTrialMode()) return; // 試験運用モードでなければ何もしない
+  if (!isTrialMode()) return;
   const musicBox = document.getElementById('music-box');
   if (!musicBox) return;
   let nav = document.getElementById('music-nav');
@@ -95,9 +95,9 @@ function shuffleWithSeed(array, seed) {
 function updateShuffledListIfNeeded() {
   const today = new Date();
   const dateStr = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-  if (lastDateStr !== dateStr || shuffledList.length !== musicList.length) {
+  if (lastMusicDateStr !== dateStr || shuffledList.length !== musicList.length) {
     shuffledList = shuffleWithSeed(musicList, getSeedFromDate());
-    lastDateStr = dateStr;
+    lastMusicDateStr = dateStr;
     currentMusicIndex = 0;
   }
 }
