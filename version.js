@@ -1,4 +1,4 @@
-const CURRENT_VERSION = "1.4.3.2";
+const CURRENT_VERSION = "1.4.3.3";
 const VERSION_CHECK_URL = "patchnote.html";
 const TRIAL_MODE_KEY = "trial_mode";
 
@@ -23,7 +23,6 @@ function checkForUpdateAndSetVersion() {
       }
     });
 }
-
 // 試験運用モード切り替え
 function toggleTrialMode() {
   const nowTrial = localStorage.getItem(TRIAL_MODE_KEY) === "1";
@@ -37,7 +36,6 @@ function toggleTrialMode() {
     location.reload();
   }
 }
-
 // 試験運用バナー表示
 function showTrialBanner() {
   if (localStorage.getItem(TRIAL_MODE_KEY) === "1") {
@@ -50,14 +48,17 @@ function showTrialBanner() {
 
 // ページ読み込み時の処理
 document.addEventListener('DOMContentLoaded', function() {
-  // ...既存の初期化処理...
   checkForUpdateAndSetVersion();
   showTrialBanner();
-
   // F12で試験運用モード切り替え
   document.addEventListener('keydown', function(e) {
     if (e.key === "F12") {
       toggleTrialMode();
     }
   });
+  // 5秒ごとにバージョンチェック＆バナー表示を自動実行
+  setInterval(() => {
+    checkForUpdateAndSetVersion();
+    showTrialBanner();
+  }, 1000);
 });

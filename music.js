@@ -43,38 +43,34 @@ const musicList = [
   "https://embed.music.apple.com/jp/album/%E7%A7%98%E5%8C%BF%E3%81%95%E3%82%8C%E3%81%9F%E3%83%95%E3%82%A9%E3%83%BC%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3%E3%82%BA/1756212029?i=1756212039&amp;itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1756212039&amp;theme=auto",// 秘匿されたフォーシンズンズ
   "https://embed.music.apple.com/jp/album/%E5%A4%9C%E3%81%98%E3%82%83%E3%81%AA%E3%81%8F%E3%81%A6%E3%82%82%E3%81%8A%E5%8C%96%E3%81%91%E3%81%AF%E3%81%84%E3%82%8B%E3%81%8B%E3%82%89/1756212029?i=1756212040&amp;itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1756212040&amp;theme=auto"// 夜じゃなくてもお化けはいるから
 ];
-function showDailyMusic() {
-  const today = new Date();
-  const index = today.getDay() % musicList.length;
-  showMusic(musicList[index]);
+function seededRandom(seed) {
+  let x = seed;
+  return function() {
+    x ^= x << 13; x ^= x >>> 17; x ^= x << 5;
+    return (x < 0 ? ~x + 1 : x) % 100000 / 100000;
+  };
 }
-function showRandomMusic() {
-  const index = Math.floor(Math.random() * musicList.length);
-  showMusic(musicList[index]);
+function getSeedFromDate() {
+  const now = new Date();
+  return now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
 }
-function showMusic(url) {
-  const musicBox = document.getElementById('music-box');
-  musicBox.innerHTML = `
-    <iframe allow="autoplay *; encrypted-media *;" frameborder="0"
-      height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;"
-      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
-      src="${url}">
-    </iframe>
-  `;
-}
-let lastDateStr = null;
-function checkDateAndUpdateMusic() {
-  const today = new Date();
-  const dateStr = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
-  if (lastDateStr !== dateStr) {
-    lastDateStr = dateStr;
-    showDailyMusic();
+function shuffleWithSeed(array, seed) {
+  const arr = array.slice();
+  const rand = seededRandom(seed);
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
+  return arr;
 }
-// 日替わりで表示
+function showDailyMusicRandomNoRepeatGlobal() {
+  const seed = getSeedFromDate();
+  const shuffled = shuffleWithSeed(musicList, seed);
+  showMusic(shuffled[0]);
+}
 document.addEventListener('DOMContentLoaded', () => {
-  checkDateAndUpdateMusic();
-  setInterval(checkDateAndUpdateMusic, 5000); // 10秒ごとに日付変化を監視
+  showDailyMusicRandomNoRepeatGlobal();
+  setInterval(showDailyMusicRandomNoRepeatGlobal, 1000);
 });
 // ランダムで表示
 // document.addEventListener('DOMContentLoaded', showRandomMusic);
