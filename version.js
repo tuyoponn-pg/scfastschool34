@@ -1,4 +1,4 @@
-const CURRENT_VERSION = "1.4.4";
+const CURRENT_VERSION = "1.4.4.1";
 const VERSION_CHECK_URL = "version.json";
 const TRIAL_MODE_KEY = "trial_mode";
 
@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
       toggleTrialMode();
     }
   });
-  // 5秒ごとにバージョンチェック＆バナー表示を自動実行
+  // 10秒ごとにバージョンチェック＆バナー表示を自動実行
   setInterval(() => {
     checkForUpdateAndSetVersion();
     showTrialBanner();
-  }, 1000);
+  }, 10000);
 });
