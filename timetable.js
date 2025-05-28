@@ -1,7 +1,7 @@
 function showTodaysInfo() {
   const infoList = {
-    "2024-05-28": "つどい",
-    "2024-05-29": "心臓検査二次"
+    "2025-05-28": "つどい",
+    "2025-05-29": "心臓検査二次"
   };
   const now = new Date();
   const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
@@ -10,7 +10,6 @@ function showTodaysInfo() {
     infoBox.textContent = infoList[todayStr] || "本日のお知らせはありません。";
   }
 }
-
 function loadAndRenderTimetable() {
   fetch('timetable.json')
     .then(response => response.json())
@@ -72,11 +71,24 @@ function updateCountdown() {
     countdownElem.textContent = diff > 0 ? diff : 0;
   }
 }
+let lastDateStr = null;
+function getTodayStr() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+}
+function checkDateAndUpdateAll() {
+  const currentDateStr = getTodayStr();
+  if (lastDateStr !== currentDateStr) {
+    lastDateStr = currentDateStr;
+    loadAndRenderTimetable();
+    updateCountdown();
+    showTodaysInfo();
+  }
+}
 document.addEventListener('DOMContentLoaded', function() {
+  lastDateStr = getTodayStr();
   loadAndRenderTimetable();
   updateCountdown();
   showTodaysInfo();
-  setInterval(loadAndRenderTimetable, 5 * 1000);
-  setInterval(updateCountdown, 5 * 1000);
-  setInterval(showTodaysInfo, 5 * 1000);
+  setInterval(checkDateAndUpdateAll, 5 * 1000);
 });
