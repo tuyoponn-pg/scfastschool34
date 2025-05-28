@@ -54,24 +54,22 @@ th {
   color: #000000;
   letter-spacing: 0.1em;
 }
-.day-月 {
-  background: #ffcccc;
+.todays-info-box {
+  margin: 18px 0 0 0;
+  padding: 16px 14px;
+  background: #fffbe7;
+  border-left: 6px solid #ffb347;
+  border-radius: 8px;
+  font-size: 1.08em;
+  color: #b85c00;
+  box-shadow: 0 2px 8px rgba(255, 200, 80, 0.07);
 }
-.day-火 {
-  background: #ffe5b4;
-}
-.day-水 {
-  background: #ccffcc;
-}
-.day-木 {
-  background: #b4e1ff;
-}
-.day-金 {
-  background: #e1b4ff;
-}
-td:empty {
-  background: #f0f0f0;
-}
+.day-月 {background: #ffcccc;}
+.day-火 {background: #ffe5b4;}
+.day-水 {background: #ccffcc;}
+.day-木 {background: #b4e1ff;}
+.day-金 {background: #e1b4ff;}
+td:empty {background: #f0f0f0;}
 .main a {
   color: #ff9600;
   text-decoration: none;
@@ -222,14 +220,17 @@ a.ver {
   th {
     color: #fff;
   }
+  .todays-info-box {
+    background: #23201a;
+    color: #ffe066;
+    border-left: 6px solid #ffe066;
+  }
   .day-月 { background: #b85c5c; }
   .day-火 { background: #b88c5c; }
   .day-水 { background: #5cb88c; }
   .day-木 { background: #5c7cb8; }
   .day-金 { background: #8c5cb8; }
-  td:empty {
-    background: #222;
-  }
+  td:empty {background: #222;}
   .countdown-box {
     background: #2d2f36;
     color: #ffe066;
