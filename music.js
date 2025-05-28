@@ -43,6 +43,34 @@ const musicList = [
   "https://embed.music.apple.com/jp/album/%E7%A7%98%E5%8C%BF%E3%81%95%E3%82%8C%E3%81%9F%E3%83%95%E3%82%A9%E3%83%BC%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3%E3%82%BA/1756212029?i=1756212039&amp;itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1756212039&amp;theme=auto",// 秘匿されたフォーシンズンズ
   "https://embed.music.apple.com/jp/album/%E5%A4%9C%E3%81%98%E3%82%83%E3%81%AA%E3%81%8F%E3%81%A6%E3%82%82%E3%81%8A%E5%8C%96%E3%81%91%E3%81%AF%E3%81%84%E3%82%8B%E3%81%8B%E3%82%89/1756212029?i=1756212040&amp;itscg=30200&amp;itsct=music_box_player&amp;ls=1&amp;app=music&amp;mttnsubad=1756212040&amp;theme=auto"// 夜じゃなくてもお化けはいるから
 ];
+let currentMusicIndex = 0;
+let lastDateStr = null;
+let shuffledList = [];
+// 試験運用モード判定
+function isTrialMode() {
+  return localStorage.getItem('trial_mode') === "1";
+}
+// ボタン設置（試験運用モードのみ）
+function setupMusicNavButtons() {
+  if (!isTrialMode()) return; // 試験運用モードでなければ何もしない
+  const musicBox = document.getElementById('music-box');
+  if (!musicBox) return;
+  let nav = document.getElementById('music-nav');
+  if (!nav) {
+    nav = document.createElement('div');
+    nav.id = 'music-nav';
+    nav.style.textAlign = 'center';
+    nav.style.margin = '10px 0';
+    nav.innerHTML = `
+      <button id="music-prev" style="margin-right:10px;">前の曲</button>
+      <button id="music-next">次の曲</button>
+    `;
+    musicBox.parentNode.insertBefore(nav, musicBox.nextSibling);
+    document.getElementById('music-prev').onclick = prevMusic;
+    document.getElementById('music-next').onclick = nextMusic;
+  }
+}
+// シード付き乱数生成
 function seededRandom(seed) {
   let x = seed;
   return function() {
@@ -63,14 +91,54 @@ function shuffleWithSeed(array, seed) {
   }
   return arr;
 }
-function showDailyMusicRandomNoRepeatGlobal() {
-  const seed = getSeedFromDate();
-  const shuffled = shuffleWithSeed(musicList, seed);
-  showMusic(shuffled[0]);
+// 日付が変わったらシャッフルし直し
+function updateShuffledListIfNeeded() {
+  const today = new Date();
+  const dateStr = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  if (lastDateStr !== dateStr || shuffledList.length !== musicList.length) {
+    shuffledList = shuffleWithSeed(musicList, getSeedFromDate());
+    lastDateStr = dateStr;
+    currentMusicIndex = 0;
+  }
 }
+// 現在の曲を表示
+function showCurrentMusic() {
+  updateShuffledListIfNeeded();
+  showMusic(shuffledList[currentMusicIndex]);
+}
+// 次の曲
+function nextMusic() {
+  updateShuffledListIfNeeded();
+  currentMusicIndex = (currentMusicIndex + 1) % shuffledList.length;
+  showCurrentMusic();
+}
+// 前の曲
+function prevMusic() {
+  updateShuffledListIfNeeded();
+  currentMusicIndex = (currentMusicIndex - 1 + shuffledList.length) % shuffledList.length;
+  showCurrentMusic();
+}
+// 曲表示＋ナビボタン
+function showMusic(url) {
+  const musicBox = document.getElementById('music-box');
+  if (!musicBox) return;
+  musicBox.innerHTML = `
+    <iframe allow="autoplay *; encrypted-media *;" frameborder="0"
+      height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;"
+      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+      src="${url}">
+    </iframe>
+  `;
+  setupMusicNavButtons();
+}
+// 日付変化監視
+function checkDateAndUpdateMusic() {
+  showCurrentMusic();
+}
+// 初回表示＆1秒ごとに日付変化を監視
 document.addEventListener('DOMContentLoaded', () => {
-  showDailyMusicRandomNoRepeatGlobal();
-  setInterval(showDailyMusicRandomNoRepeatGlobal, 1000);
+  showCurrentMusic();
+  setInterval(checkDateAndUpdateMusic, 1000);
 });
 // ランダムで表示
 // document.addEventListener('DOMContentLoaded', showRandomMusic);
