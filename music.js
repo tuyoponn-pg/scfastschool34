@@ -101,6 +101,19 @@ function updateShuffledListIfNeeded() {
     currentMusicIndex = 0;
   }
 }
+// 曲表示＋ナビボタン
+function showMusic(url) {
+  const musicBox = document.getElementById('music-box');
+  if (!musicBox) return;
+  musicBox.innerHTML = `
+    <iframe allow="autoplay *; encrypted-media *;" frameborder="0"
+      height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;"
+      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+      src="${url}">
+    </iframe>
+  `;
+  setupMusicNavButtons();
+}
 // 現在の曲を表示
 function showCurrentMusic() {
   updateShuffledListIfNeeded();
@@ -117,19 +130,6 @@ function prevMusic() {
   updateShuffledListIfNeeded();
   currentMusicIndex = (currentMusicIndex - 1 + shuffledList.length) % shuffledList.length;
   showCurrentMusic();
-}
-// 曲表示＋ナビボタン
-function showMusic(url) {
-  const musicBox = document.getElementById('music-box');
-  if (!musicBox) return;
-  musicBox.innerHTML = `
-    <iframe allow="autoplay *; encrypted-media *;" frameborder="0"
-      height="150" style="width:100%;max-width:660px;overflow:hidden;background:transparent;"
-      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
-      src="${url}">
-    </iframe>
-  `;
-  setupMusicNavButtons();
 }
 // 日付変化監視
 function checkDateAndUpdateMusic() {
