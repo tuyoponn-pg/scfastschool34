@@ -1,4 +1,4 @@
-const CURRENT_VERSION = "1.4.3.5";
+const CURRENT_VERSION = "1.4.3.6";
 const VERSION_CHECK_URL = "patchnote.html";
 const TRIAL_MODE_KEY = "trial_mode";
 
@@ -38,8 +38,11 @@ function toggleTrialMode() {
 }
 // 試験運用バナー表示
 function showTrialBanner() {
+  const old = document.getElementById("trial-banner");
+  if (old) old.remove();
   if (localStorage.getItem(TRIAL_MODE_KEY) === "1") {
     const banner = document.createElement("div");
+    banner.id = "trial-banner";
     banner.textContent = "【試験運用モード】";
     banner.style.cssText = "background:#ff9600;color:#fff;padding:8px 0;text-align:center;font-weight:bold;font-size:1.1em;";
     document.body.prepend(banner);
