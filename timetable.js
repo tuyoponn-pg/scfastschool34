@@ -71,14 +71,8 @@ function setupAutoScroll(infoBox) {
     // スクロール
     pos -= scrollSpeed;
     inner.style.left = pos + "px";
-    if (Math.abs(pos) > textWidth) {
-      // 最後まで行ったら一時停止
-      state = "endPause";
-      reqId = requestAnimationFrame(scroll);
-      return;
-    }
-    if (pos <= 0 && state !== "scrolling") {
-      // 最初の位置に戻ったら一時停止
+    // 右から再登場して最初の位置に戻ったら一時停止
+    if (state === "scrolling" && pos <= 0) {
       pos = 0;
       inner.style.left = "0px";
       state = "startPause";
