@@ -37,46 +37,32 @@ function setupAutoScroll(infoBox) {
   let reqId = null;
   let scrollSpeed = 1;
   let pauseTime = 2000;
-  let state = "startPause";
+  let state = "scrolling";
   function scroll() {
     const boxWidth = infoBox.offsetWidth;
     const textWidth = inner.offsetWidth;
-    if (state === "startPause") {
-      setTimeout(() => {
-        state = "scrolling";
-        reqId = requestAnimationFrame(scroll);
-      }, pauseTime);
-      state = "waiting";
-      return;
-    }
-    if (state === "endPause") {
-      setTimeout(() => {
-        // 右から再登場
-        pos = boxWidth;
-        inner.style.left = pos + "px";
-        state = "resetPause";
-        reqId = requestAnimationFrame(scroll);
-      }, pauseTime);
-      state = "waiting";
-      return;
-    }
-    if (state === "resetPause") {
-      setTimeout(() => {
-        state = "scrolling";
-        reqId = requestAnimationFrame(scroll);
-      }, pauseTime);
-      state = "waiting";
-      return;
-    }
     // スクロール
     pos -= scrollSpeed;
     inner.style.left = pos + "px";
+    // 最後まで行ったら右から再登場
+    if (Math.abs(pos) > textWidth) {
+      pos = boxWidth;
+      inner.style.left = pos + "px";
+      state = "resetPause";
+    }
     // 右から再登場して最初の位置に戻ったら一時停止
-    if (state === "scrolling" && pos <= 0) {
+    if (state === "resetPause" && pos <= 0) {
       pos = 0;
       inner.style.left = "0px";
       state = "startPause";
-      reqId = requestAnimationFrame(scroll);
+      setTimeout(() => {
+        state = "scrolling";
+        reqId = requestAnimationFrame(scroll);
+      }, pauseTime);
+      return;
+    }
+    // 一時停止中は何もしない
+    if (state === "startPause") {
       return;
     }
     reqId = requestAnimationFrame(scroll);
@@ -87,7 +73,7 @@ function setupAutoScroll(infoBox) {
   }
   pos = 0;
   inner.style.left = "0px";
-  state = "startPause";
+  state = "scrolling";
   reqId = requestAnimationFrame(scroll);
   infoBox._scrollReqId = reqId;
 }
