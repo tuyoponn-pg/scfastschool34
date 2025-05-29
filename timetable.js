@@ -35,10 +35,9 @@ function setupAutoScroll(infoBox) {
   // スクロール設定
   let pos = 0;
   let reqId = null;
-  let pause = false;
-  let scrollSpeed = 1; // px/フレーム
-  let pauseTime = 2000; // ms
-  let startPause = true;
+  let scrollSpeed = 1;
+  let pauseTime = 2000;
+  let state = "startPause";
   function scroll() {
     const boxWidth = infoBox.offsetWidth;
     const textWidth = inner.offsetWidth;
@@ -94,7 +93,7 @@ function setupAutoScroll(infoBox) {
   }
   pos = 0;
   inner.style.left = "0px";
-  startPause = true;
+  state = "startPause";
   reqId = requestAnimationFrame(scroll);
   infoBox._scrollReqId = reqId;
 }
