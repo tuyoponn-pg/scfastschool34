@@ -45,7 +45,7 @@ function setupAutoScroll(infoBox) {
     pos -= scrollSpeed;
     inner.style.left = pos + "px";
     // 最後まで行ったら右から再登場
-    if (Math.abs(pos) > textWidth) {
+    if (pos <= -textWidth) {
       pos = boxWidth;
       inner.style.left = pos + "px";
       state = "resetPause";
