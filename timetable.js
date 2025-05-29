@@ -2,7 +2,7 @@ function showTodaysInfo() {
   const infoList = {
     "2025-05-28": "つどい",
     "2025-05-29": "心臓検査二次",
-    "2025-05-30": "くそ長い文章のテストだよぉ!TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST",
+    "2025-05-30": "くそ長い文章のテストだよぉ!TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST",
     "2025-06-03": "6限目は体育館で、しおり・筆記用具・体育館シューズを持参してください",
     "2025-06-04": "本日は修学旅行1日目です。また、登校時間は06:30ですご注意ください",
     "2025-06-05": "本日は修学旅行2日目です。あなたがこの文章を読んでいるということは、無断でスマホを持って行ったか、休んだかのどちらかですね。無断でスマホ持って行った人は、今すぐカバンにしまっておきましょう（見つからないように!）",
@@ -22,6 +22,21 @@ function showTodaysInfo() {
 function setupAutoScroll(infoBox) {
   const inner = infoBox.querySelector('#scroll-inner');
   if (!inner) return;
+  // スタイル調整
+  infoBox.style.overflow = "hidden";
+  infoBox.style.whiteSpace = "nowrap";
+  infoBox.style.position = "relative";
+  infoBox.style.width = "100%";
+  infoBox.style.maxWidth = "100%";
+  infoBox.style.display = "block";
+  infoBox.style.height = "2.2em";
+  infoBox.style.lineHeight = "2.2em";
+  infoBox.style.background = "#fffbe7";
+  infoBox.style.border = "1px solid #ffd700";
+  infoBox.style.borderRadius = "4px";
+  inner.style.position = "absolute";
+  inner.style.left = "0";
+  inner.style.top = "0";
   // スクロール設定
   let pos = 0;
   let reqId = null;
