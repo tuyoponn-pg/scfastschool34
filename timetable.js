@@ -2,7 +2,7 @@ function showTodaysInfo() {
   const infoList = {
     "2025-05-28": "つどい",
     "2025-05-29": "心臓検査二次",
-    "2025-05-30": "くそ長い文章のテストだよぉ!TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST",
+    "2025-05-30": "本日は金曜日だぁぁぁぁ!!!!!!!!!",
     "2025-06-03": "6限目は体育館で、しおり・筆記用具・体育館シューズを持参してください",
     "2025-06-04": "本日は修学旅行1日目です。また、登校時間は06:30ですご注意ください",
     "2025-06-05": "本日は修学旅行2日目です。あなたがこの文章を読んでいるということは、無断でスマホを持って行ったか、休んだかのどちらかですね。無断でスマホ持って行った人は、今すぐカバンにしまっておきましょう（見つからないように!）",
