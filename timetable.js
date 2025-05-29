@@ -22,21 +22,6 @@ function showTodaysInfo() {
 function setupAutoScroll(infoBox) {
   const inner = infoBox.querySelector('#scroll-inner');
   if (!inner) return;
-  // スタイル調整
-  infoBox.style.overflow = "hidden";
-  infoBox.style.whiteSpace = "nowrap";
-  infoBox.style.position = "relative";
-  infoBox.style.width = "100%";
-  infoBox.style.maxWidth = "100%";
-  infoBox.style.display = "block";
-  infoBox.style.height = "2.2em";
-  infoBox.style.lineHeight = "2.2em";
-  infoBox.style.background = "#fffbe7";
-  infoBox.style.border = "1px solid #ffd700";
-  infoBox.style.borderRadius = "4px";
-  inner.style.position = "absolute";
-  inner.style.left = "0";
-  inner.style.top = "0";
   // スクロール設定
   let pos = 0;
   let reqId = null;
