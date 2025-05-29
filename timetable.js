@@ -26,14 +26,9 @@ function setupAutoScroll(infoBox) {
   infoBox.style.overflow = "hidden";
   infoBox.style.whiteSpace = "nowrap";
   infoBox.style.position = "relative";
-  infoBox.style.width = "100%";
-  infoBox.style.maxWidth = "100%";
   infoBox.style.display = "block";
-  infoBox.style.height = "2.2em";
+  infoBox.style.height = "0.5em";
   infoBox.style.lineHeight = "2.2em";
-  infoBox.style.background = "#fffbe7";
-  infoBox.style.border = "1px solid #ffd700";
-  infoBox.style.borderRadius = "4px";
   inner.style.position = "absolute";
   inner.style.left = "0";
   inner.style.top = "0";
@@ -61,6 +56,14 @@ function setupAutoScroll(infoBox) {
       // 右から再登場
       pos = boxWidth;
       inner.style.left = pos + "px";
+      startPause = true;
+      setTimeout(() => {
+        reqId = requestAnimationFrame(scroll);
+      }, pauseTime);
+      return;
+    }
+    // 最初の位置に戻ったら再度停止
+    if (pos === 0 && !startPause && !endPause) {
       startPause = true;
       setTimeout(() => {
         reqId = requestAnimationFrame(scroll);
