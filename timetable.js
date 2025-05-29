@@ -1,14 +1,83 @@
 function showTodaysInfo() {
   const infoList = {
     "2025-05-28": "つどい",
-    "2025-05-29": "心臓検査二次"
+    "2025-05-29": "心臓検査二次",
+    "2025-05-30": "くそ長い文章のテストだよぉ!TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST",
+    "2025-06-03": "6限目は体育館で、しおり・筆記用具・体育館シューズを持参してください",
+    "2025-06-04": "本日は修学旅行1日目です。また、登校時間は06:30ですご注意ください",
+    "2025-06-05": "本日は修学旅行2日目です。あなたがこの文章を読んでいるということは、無断でスマホを持って行ったか、休んだかのどちらかですね。無断でスマホ持って行った人は、今すぐカバンにしまっておきましょう（見つからないように!）",
+    "2025-06-06": "本日は修学旅行3日目です。お帰りなさい!しっかりと休んでくださいね"
   };
   const now = new Date();
   const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
   const infoBox = document.getElementById('todays-info');
+  const message = infoList[todayStr] || "本日のお知らせはありません。";
   if (infoBox) {
-    infoBox.textContent = infoList[todayStr] || "本日のお知らせはありません。";
+    // スクロール用のラッパーを作成
+    infoBox.innerHTML = `<div id="scroll-inner" style="white-space:nowrap;display:inline-block;">${message}</div>`;
+    setupAutoScroll(infoBox);
   }
+}
+// 自動スクロール処理
+function setupAutoScroll(infoBox) {
+  const inner = infoBox.querySelector('#scroll-inner');
+  if (!inner) return;
+  // スタイル調整
+  infoBox.style.overflow = "hidden";
+  infoBox.style.whiteSpace = "nowrap";
+  infoBox.style.position = "relative";
+  infoBox.style.width = "100%";
+  infoBox.style.maxWidth = "100%";
+  infoBox.style.display = "block";
+  infoBox.style.height = "2.2em";
+  infoBox.style.lineHeight = "2.2em";
+  infoBox.style.background = "#fffbe7";
+  infoBox.style.border = "1px solid #ffd700";
+  infoBox.style.borderRadius = "4px";
+  inner.style.position = "absolute";
+  inner.style.left = "0";
+  inner.style.top = "0";
+  // スクロール設定
+  let pos = 0;
+  let reqId = null;
+  let pause = false;
+  let scrollSpeed = 1; // px/フレーム
+  let pauseTime = 2000; // ms
+  let startPause = true;
+  function scroll() {
+    if (pause) return;
+    const boxWidth = infoBox.offsetWidth;
+    const textWidth = inner.offsetWidth;
+    if (startPause) {
+      startPause = false;
+      setTimeout(() => {
+        reqId = requestAnimationFrame(scroll);
+      }, pauseTime);
+      return;
+    }
+    pos -= scrollSpeed;
+    inner.style.left = pos + "px";
+    if (Math.abs(pos) > textWidth) {
+      // 右から再登場
+      pos = boxWidth;
+      inner.style.left = pos + "px";
+      startPause = true;
+      setTimeout(() => {
+        reqId = requestAnimationFrame(scroll);
+      }, pauseTime);
+      return;
+    }
+    reqId = requestAnimationFrame(scroll);
+  }
+  // リセット（同じ日で再呼び出し時のため）
+  if (infoBox._scrollReqId) {
+    cancelAnimationFrame(infoBox._scrollReqId);
+  }
+  pos = 0;
+  inner.style.left = "0px";
+  startPause = true;
+  reqId = requestAnimationFrame(scroll);
+  infoBox._scrollReqId = reqId;
 }
 function loadAndRenderTimetable() {
   fetch('timetable.json')

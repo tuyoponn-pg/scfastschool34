@@ -142,10 +142,10 @@ function checkDateAndUpdateMusic() {
     showCurrentMusic();
   }
 }
-// 初回表示＆30秒ごとに日付変化を監視
+// 初回表示＆1秒ごとに日付変化を監視
 document.addEventListener('DOMContentLoaded', () => {
   showCurrentMusic();
-  setInterval(checkDateAndUpdateMusic, 15 * 1000);
+  setInterval(checkDateAndUpdateMusic, 1 * 1000);
 });
 // ランダムで表示
 // document.addEventListener('DOMContentLoaded', showRandomMusic);
