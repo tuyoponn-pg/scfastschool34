@@ -35,8 +35,8 @@ function setupAutoScroll(infoBox) {
   // スクロール設定
   let pos = 0;
   let reqId = null;
-  let scrollSpeed = 1;
-  let pauseTime = 2000;
+  let scrollSpeed = 2;
+  let pauseTime = 5000;
   let state = "scrolling";
   function scroll() {
     const boxWidth = infoBox.offsetWidth;

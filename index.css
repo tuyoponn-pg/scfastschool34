@@ -17,6 +17,15 @@ h1 {
   color: #333;
   margin-bottom: 24px;
 }
+.logo {
+  display: block;
+  margin: 0 auto 18px auto;
+  width: 450px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+h1 + .logo {
+  margin-top: -10px;
+}
 label {
   font-size: 1.1em;
   margin-right: 8px;

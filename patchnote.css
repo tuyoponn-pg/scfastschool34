@@ -17,7 +17,7 @@ body {
   max-width: 600px;
   margin: 40px auto 0 auto;
 }
-.status a {
+.status h2 a {
   pointer-events: none;
   color: #000000 !important;
   text-decoration: none !important;
@@ -61,8 +61,8 @@ span{
     color: #fff;
     box-shadow: 0 0 16px rgba(0,0,0,0.7);
   }
-  .status a {
-    color: #aaa !important;
+  .status h2 a {
+    color: #ffffff !important;
   }
   h1 {
     color: #ffe066;
