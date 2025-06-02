@@ -5,7 +5,7 @@ body {
   padding: 0;
 }
 .main {
-  max-width: 600px;
+  max-width: 700px;
   margin: 40px auto 0 auto;
   background: #fff;
   border-radius: 16px;
@@ -17,11 +17,120 @@ h1 {
   color: #333;
   margin-bottom: 24px;
 }
+/* --- ロゴデザイン強化 --- */
 .logo {
   display: block;
-  margin: 0 auto 18px auto;
-  width: 450px;
+  margin: 24px auto 12px auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  box-shadow: 0 4px 24px rgba(255, 180, 80, 0.18), 0 2px 8px rgba(160, 100, 255, 0.10);
+  background: #fff;
+  object-fit: cover;
+  border: 4px solid #ffb347;
   transition: transform 0.2s, box-shadow 0.2s;
+}
+.logo:hover {
+  transform: scale(1.08) rotate(-3deg);
+  box-shadow: 0 8px 32px rgba(255, 180, 80, 0.22), 0 4px 16px rgba(160, 100, 255, 0.16);
+}
+
+/* --- ロゴ付きリンクのデザイン --- */
+.main > div > a {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(90deg, #fffbe7 60%, #ffe5b4 100%);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(255, 180, 80, 0.08);
+  padding: 18px 24px;
+  margin: 18px 0;
+  font-size: 1.15em;
+  color: #b85c00;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.main > div > a:hover {
+  background: linear-gradient(90deg, #ffecd2 60%, #ffd699 100%);
+  box-shadow: 0 4px 16px rgba(255, 180, 80, 0.16);
+  color: #ff9600;
+  text-decoration: none;
+}
+.main > div > a .logo {
+  margin: 0 18px 0 0;
+  width: 72px;
+  height: 72px;
+  border-width: 3px;
+}
+
+/* --- h1, h2の装飾 --- */
+h1 {
+  text-align: center;
+  color: #ff9600;
+  margin-bottom: 18px;
+  font-size: 2.1em;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 8px #fffbe7, 0 1px 0 #fff;
+}
+h2 {
+  text-align: center;
+  color: #7c3aed;
+  font-size: 1.1em;
+  margin-bottom: 18px;
+  font-weight: normal;
+  letter-spacing: 0.03em;
+  background: #f9f6ff;
+  border-radius: 8px;
+  padding: 10px 0 10px 0;
+  box-shadow: 0 2px 8px rgba(160, 100, 255, 0.06);
+}
+
+/* --- レスポンシブ対応 --- */
+@media (max-width: 600px) {
+  .main {
+    padding: 12px 2vw;
+  }
+  .logo {
+    width: 70px;
+    height: 70px;
+  }
+  .main > div > a {
+    font-size: 1em;
+    padding: 10px 8px;
+    gap: 10px;
+  }
+  .main > div > a .logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+  }
+}
+
+/* --- 既存のダークモードにもロゴ対応 --- */
+@media (prefers-color-scheme: dark) {
+  .logo {
+    background: #23201a;
+    border-color: #ffe066;
+    box-shadow: 0 4px 24px rgba(255, 230, 102, 0.18), 0 2px 8px rgba(160, 100, 255, 0.13);
+  }
+  .main > div > a {
+    background: linear-gradient(90deg, #23201a 60%, #3a2c1a 100%);
+    color: #ffe066;
+  }
+  .main > div > a:hover {
+    background: linear-gradient(90deg, #3a2c1a 60%, #23201a 100%);
+    color: #ffb347;
+  }
+  h1 {
+    color: #ffe066;
+    text-shadow: 0 2px 8px #23201a, 0 1px 0 #23201a;
+  }
+  h2 {
+    background: #23203a;
+    color: #bfaaff;
+    box-shadow: 0 2px 8px rgba(160, 100, 255, 0.13);
+  }
 }
 h1 + .logo {
   margin-top: -10px;
@@ -180,7 +289,7 @@ td:empty {background: #f0f0f0;}
   justify-content: center;
 }
 .main {
-  max-width: 650px;
+  max-width: 700px;
   margin: 40px auto 0 auto;
   background: #fff;
   border-radius: 18px;
@@ -291,5 +400,61 @@ a.ver {
   }
   a.ver:hover {
     color: #ffb347;
+  }
+}
+.title-bg {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  margin-bottom: 18px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: url('school_bg.jpg') center/cover no-repeat;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.title-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.36);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.title-overlay h1,
+.title-overlay h2 {
+  color: #fff;
+  text-shadow: 0 2px 12px #000, 0 1px 0 #333;
+  margin: 0 0 12px 0;
+  padding: 0 18px;
+  text-align: center;
+}
+.title-overlay h1 {
+  font-size: 2.1em;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+.title-overlay h2 {
+  font-size: 1.1em;
+  font-weight: normal;
+  letter-spacing: 0.03em;
+  margin-bottom: 0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+  .title-bg {
+    min-height: 120px;
+  }
+  .title-overlay h1 {
+    font-size: 1.2em;
+    padding: 0 4vw;
+  }
+  .title-overlay h2 {
+    font-size: 0.9em;
+    padding: 0 4vw;
   }
 }

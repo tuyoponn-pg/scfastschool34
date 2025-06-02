@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>ホーム</title>
-    <meta name="description" content="とある学校関連のウェブアプリです。">
+    <meta name="description" content="とある学校関連のウェブアプリです">
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <link rel="icon" href="logo_1.png"/>
     <script src="timetable.js"></script>
@@ -13,27 +13,20 @@
   </head>
   <body>
     <div class="main">
-      <img src="logo_2.png" alt="logo" class="logo">
-      <label for="weekSelect">週を選択：</label>
-      <select id="weekSelect"></select>
-      <div id="timetable"></div>
-      <div id="todays-info" class="todays-info-box"></div>
-      <div class="countdown-box">
-        <h2>卒業式まであと <span id="countdown"></span> 日</h2>
+      <div class="title-bg">
+        <div class="title-overlay">
+          <h1>このデジタル化社会、学校でまだ<br>
+              アナログなことをデジタルに…</h1>
+          <h2>こちらのサイトは、とある学校関連のウェブアプリです<br>
+              project by Tuyoponn-pg<br>
+              ©<a href="https://sigurumya.glitch.me/">sigurumya</a></h2>
+        </div>
       </div>
-      <div class="music-section">
-        <h2>作者お勧め音楽！（日替わりでランダムに変わります）</h2>
-        <div id="music-box"></div>
-      </div>
-      <h2 class="contact">お問い合わせはこちらから</h2>
-      <form action="https://formspree.io/f/xovdzkkk" method="post" class="contact-form">
-        <label for="name">名前:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="message">メッセージ:</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-        <input type="submit" value="送信">
-      </form>
-      <a href="patchnote.html" class="ver">Ver1.4.3.5</a>
+      <div><a href="https://tuyoponn-pg.github.io/scfastschool34/edunavi/"><img src="logo_1.png" alt="logo" class="logo">
+           時間割をネットで見れるウェブアプリ<br>
+          エデュケーションナビ略して「エデュナビ！」</a></div>
+      <div><a href=""><img src="logo_2.png" alt="logo" class="logo">
+           工事中です</a></div>
     </div>
   </body>
 </html>
