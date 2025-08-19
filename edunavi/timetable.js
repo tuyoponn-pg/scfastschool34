@@ -105,49 +105,68 @@ function loadAndRenderTimetable() {
       const timetableDiv = document.getElementById('timetable');
       weekSelect.innerHTML = '';
       const now = new Date();
-      const todayStr = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}`;
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
       let initialWeek = Object.keys(data)[0];
-
-      // 土日判定
-      const dayOfWeek = now.getDay(); // 0:日, 6:土
-      let foundCurrent = false;
-      let nextWeekName = null;
-      let weekNames = Object.keys(data);
-
-      // 週の範囲をパースして、次週の週名も取得
-      weekNames.forEach((weekName, idx) => {
+      let isWeekend = (today.getDay() === 0 || today.getDay() === 6); // 日曜:0, 土曜:6
+      let nextWeek = null;
+      // 週リストを日付順にソート
+      const weekKeys = Object.keys(data).sort((a, b) => {
+        const aMatch = a.match(/(\d{2})\/(\d{2})/);
+        const bMatch = b.match(/(\d{2})\/(\d{2})/);
+        if (!aMatch || !bMatch) return 0;
+        const aDate = new Date(now.getFullYear(), parseInt(aMatch[1], 10) - 1, parseInt(aMatch[2], 10));
+        const bDate = new Date(now.getFullYear(), parseInt(bMatch[1], 10) - 1, parseInt(bMatch[2], 10));
+        return aDate - bDate;
+      });
+      // 今日が含まれる週を探す
+      for (let i = 0; i < weekKeys.length; i++) {
+        const weekName = weekKeys[i];
         const match = weekName.match(/(\d{2})\/(\d{2})～(\d{2})\/(\d{2})/);
         if (match) {
           const year = now.getFullYear();
           const start = new Date(year, parseInt(match[1], 10) - 1, parseInt(match[2], 10));
           const end = new Date(year, parseInt(match[3], 10) - 1, parseInt(match[4], 10));
           end.setDate(end.getDate() + 1);
-          if (now >= start && now < end) {
+          if (today >= start && today < end) {
             initialWeek = weekName;
-            foundCurrent = true;
-            // 次週の週名を取得
-            if (idx + 1 < weekNames.length) {
-              nextWeekName = weekNames[idx + 1];
+            if (i + 1 < weekKeys.length) {
+              nextWeek = weekKeys[i + 1];
             }
+            break;
           }
         }
-      });
-
-      // 土日なら次週の時間割をデフォルト表示
-      if (dayOfWeek === 0 || dayOfWeek === 6) {
-        if (nextWeekName) {
-          initialWeek = nextWeekName;
-        } else {
-          // 次週がなければ一番最後の週
-          initialWeek = weekNames[weekNames.length - 1];
-        }
       }
-
+      // 土日なら次週の時間割をデフォルト表示
+      if (isWeekend && nextWeek) {
+        initialWeek = nextWeek;
+      }
+      weekKeys.forEach(weekName => {
+        const option = document.createElement('option');
+        option.value = weekName;
+        option.textContent = weekName;
+        weekSelect.appendChild(option);
+      });
       function renderTable(weekName) {
         const timetable = data[weekName];
         const days = ["月", "火", "水", "木", "金"];
-        // データがなければ空白で埋める
-        const maxPeriods = Math.max(...days.map(day => (timetable[day] ? timetable[day].length : 0)), 6);
+        if (!timetable) {
+          let html = '<table border="1"><tr>';
+          days.forEach(day => {
+            html += `<th class="day-${day}">${day}</th>`;
+          });
+          html += '</tr>';
+          for (let period = 0; period < 6; period++) {
+            html += '<tr>';
+            days.forEach(() => {
+              html += `<td></td>`;
+            });
+            html += '</tr>';
+          }
+          html += '</table>';
+          timetableDiv.innerHTML = html;
+          return;
+        }
+        const maxPeriods = Math.max(...days.map(day => (timetable[day] ? timetable[day].length : 0)), 6); // 最低6限
         let html = '<table border="1"><tr>';
         days.forEach(day => {
           html += `<th class="day-${day}">${day}</th>`;
@@ -156,10 +175,8 @@ function loadAndRenderTimetable() {
         for (let period = 0; period < maxPeriods; period++) {
           html += '<tr>';
           days.forEach((day, i) => {
-            // データがなければ空白
             const cellValue = (timetable[day] && timetable[day][period]) ? timetable[day][period] : '';
-            // 土日は強調表示しない
-            const isToday = i === (now.getDay() - 1) && weekName === initialWeek && (now.getDay() >= 1 && now.getDay() <= 5);
+            const isToday = i === (now.getDay() - 1) && weekName === initialWeek && !isWeekend;
             html += `<td${isToday && cellValue ? ' style="background:#ff4d4d;font-weight:bold;"' : ''}>${cellValue}</td>`;
           });
           html += '</tr>';
