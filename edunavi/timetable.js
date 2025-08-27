@@ -149,24 +149,7 @@ function loadAndRenderTimetable() {
       function renderTable(weekName) {
         const timetable = data[weekName];
         const days = ["月", "火", "水", "木", "金"];
-        if (!timetable) {
-          let html = '<table border="1"><tr>';
-          days.forEach(day => {
-            html += `<th class="day-${day}">${day}</th>`;
-          });
-          html += '</tr>';
-          for (let period = 0; period < 6; period++) {
-            html += '<tr>';
-            days.forEach(() => {
-              html += `<td></td>`;
-            });
-            html += '</tr>';
-          }
-          html += '</table>';
-          timetableDiv.innerHTML = html;
-          return;
-        }
-        const maxPeriods = Math.max(...days.map(day => (timetable[day] ? timetable[day].length : 0)), 6); // 最低6限
+        const maxPeriods = Math.max(...days.map(day => (timetable[day] ? timetable[day].length : 0)));
         let html = '<table border="1"><tr>';
         days.forEach(day => {
           html += `<th class="day-${day}">${day}</th>`;
@@ -175,9 +158,8 @@ function loadAndRenderTimetable() {
         for (let period = 0; period < maxPeriods; period++) {
           html += '<tr>';
           days.forEach((day, i) => {
-            const cellValue = (timetable[day] && timetable[day][period]) ? timetable[day][period] : '';
             const isToday = i === (now.getDay() - 1) && weekName === initialWeek && !isWeekend;
-            html += `<td${isToday && cellValue ? ' style="background:#ff4d4d;font-weight:bold;"' : ''}>${cellValue}</td>`;
+            html += `<td${isToday && timetable[day][period] ? ' style="background:#ff4d4d;font-weight:bold;"' : ''}>${(timetable[day] && timetable[day][period]) ? timetable[day][period] : ''}</td>`;
           });
           html += '</tr>';
         }
